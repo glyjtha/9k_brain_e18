@@ -4,12 +4,17 @@ library(slingshot)
 ```
 
 ```{r}
-data_dir <- "scripps_hpc_rstudio/gloria_r_folder/9k_brain_e18"
+list.files("~/scripps_hpc_rstudio/gloria_r_folder/9k_brain_e18/raw_data/filtered_gene_bc_matrices/mm10")
+```
+```{r}
 
+```
+
+```{r}
 library(ggplot2)
 
 # Load into Seurat
-matrix_data <- Read10X(data.dir = "scripps_hpc_rstudio/gloria_r_folder/9k_brain_e18/filtered_gene_bc_matrices/mm10" )
+matrix_data <- Read10X(data.dir = "~/scripps_hpc_rstudio/gloria_r_folder/9k_brain_e18/raw_data/filtered_gene_bc_matrices/mm10")
 seurat_obj <- CreateSeuratObject(counts = matrix_data, project = "NeuronE18", min.cells = 3, min.features = 200)
 ```
 
@@ -41,8 +46,11 @@ seurat_obj <- RunUMAP(seurat_obj, dims = 1:10)
 ```
 
 ```{r}
-DimPlot(seurat_obj, reduction = "umap", label = TRUE)
+umap_plot <- DimPlot(seurat_obj, reduction = "umap", label = TRUE)
 
+```
+```{r}
+ggsave("~/scripps_hpc_rstudio/gloria_r_folder/9k_brain_e18/outputs/umap_plot.png", plot = umap_plot, width = 6, height = 5, dpi = 300)
 ```
 
 ```{r}
